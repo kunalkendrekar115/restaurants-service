@@ -26,7 +26,17 @@ const updateRestaurant = async (req, res) => {
       return;
     }
 
-    const updated = await RestaruntsModal.findByIdAndUpdate(id, req.body, { new: true });
+    const { cuisine, menu, name, address, city } = req.body;
+
+    const query = {
+      ...(name && { name }),
+      ...(address && { address }),
+      ...(city && { city }),
+      ...(cuisine && { $push: { cuisine: { $each: cuisine } } }),
+      ...(menu && { $push: { menu: { $each: menu } } })
+    };
+
+    const updated = await RestaruntsModal.findByIdAndUpdate(id, query, { new: true, upsert: true });
 
     res.status(200).json(updated);
   } catch (error) {
