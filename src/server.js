@@ -9,4 +9,4 @@ const app = express();
 app.use(express.json());
 app.use("/restaurants", restaruntsRoutes);
 
-app.listen(4000, () => console.log("Running  API server"));
+app.listen(4000, () => console.log("Running Restaurants  API server"));
