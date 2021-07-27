@@ -1,18 +1,23 @@
-const express = require('express')
+const express = require("express");
 
-const { RestaruntsModal } = require("../../db");
+const {
+  addNewRestaurant,
+  updateRestaurant,
+  getRestaurants,
+  filterRestaurants,
+  getRestaurant
+} = require("../controllers");
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/', async function (req, res) {
+router.post("/", addNewRestaurant);
 
-    try {
-        const restaurants = await RestaruntsModal.find({})
-        console.log(restaurants)
-        res.status(200).json(restaurants)
-    } catch (error) {
-        res.status(404).send()
-    }
-})
+router.patch("/:id", updateRestaurant);
 
-module.exports = router
+router.get("/", getRestaurants);
+
+router.get("/filter", filterRestaurants);
+
+router.get("/:id", getRestaurant);
+
+module.exports = { router };
