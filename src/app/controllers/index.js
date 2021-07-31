@@ -1,8 +1,10 @@
 const { RestaruntsModal } = require("../../db");
 
+const { CustomError } = require("restaurants-utils");
+
 const { buildQueryForSearch, buildQueryForFilter } = require("./helpers");
 
-const addNewRestaurant = async (req, res) => {
+const addNewRestaurant = async (req, res, next) => {
   try {
     const { body } = req;
 
@@ -11,19 +13,18 @@ const addNewRestaurant = async (req, res) => {
 
     res.status(200).json(newRestarunt);
   } catch (error) {
-    res.status(404).send({ message: error.toString() });
+    next(error);
   }
 };
 
-const updateRestaurant = async (req, res) => {
+const updateRestaurant = async (req, res, next) => {
   const { id } = req.params;
 
   try {
     const restarunt = await RestaruntsModal.findById(id);
 
     if (!restarunt) {
-      res.status(404).json({ message: "restarunt not found " });
-      return;
+      throw new CustomError(404, "restarunt not found ");
     }
 
     const { cuisine, menu, name, address, city } = req.body;
@@ -40,11 +41,11 @@ const updateRestaurant = async (req, res) => {
 
     res.status(200).json(updated);
   } catch (error) {
-    res.status(404).send({ message: error.toString() });
+    next(error);
   }
 };
 
-const getRestaurants = async (req, res) => {
+const getRestaurants = async (req, res, next) => {
   try {
     let restaurants = null;
     const { search, offset, limit } = req.query;
@@ -60,29 +61,30 @@ const getRestaurants = async (req, res) => {
 
     res.status(200).json(restaurants);
   } catch (error) {
-    res.status(404).send({ message: error.toString() });
+    next(error);
   }
 };
 
-const filterRestaurants = async (req, res) => {
+const filterRestaurants = async (req, res, next) => {
   try {
-    const inputQuery = buildQueryForFilter(req.query);
+    const inputQuery = buildQueryForFilter(req.body);
 
     const restaurants = await RestaruntsModal.find(inputQuery);
     res.status(200).json(restaurants);
   } catch (error) {
-    res.status(404).send({ message: error.toString() });
+    next(error);
   }
 };
 
-const getRestaurant = async (req, res) => {
+const getRestaurantById = async (req, res, next) => {
   const { id } = req.params;
 
   try {
     const restaurants = await RestaruntsModal.findById(id);
+
     res.status(200).json(restaurants);
   } catch (error) {
-    res.status(404).send({ message: error.toString() });
+    next(error);
   }
 };
 
@@ -91,5 +93,5 @@ module.exports = {
   updateRestaurant,
   getRestaurants,
   filterRestaurants,
-  getRestaurant
+  getRestaurantById
 };

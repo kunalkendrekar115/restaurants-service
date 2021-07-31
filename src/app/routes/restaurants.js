@@ -5,7 +5,7 @@ const {
   updateRestaurant,
   getRestaurants,
   filterRestaurants,
-  getRestaurant
+  getRestaurantById
 } = require("../controllers");
 
 const router = express.Router();
@@ -16,8 +16,8 @@ router.patch("/:id", updateRestaurant);
 
 router.get("/", getRestaurants);
 
-router.get("/filter", filterRestaurants);
+router.post("/filter", filterRestaurants);
 
-router.get("/:id", getRestaurant);
+router.get("/:id", getRestaurantById);
 
 module.exports = { router };

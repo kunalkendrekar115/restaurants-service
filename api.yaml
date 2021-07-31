@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  title: Restaurants API
+
+tags:
+  - name: Restaurant
+    description: Restaurants order management service
+servers:
+  - url: http://localhost:4000/restaurants
+paths:
+  /:
+    get:
+      tags:
+        - Restaurant
+      summary: Returns restaurants.
+      parameters:
+        - name: search
+          in: query
+          description: Search Query
+          required: false
+          schema:
+            type: string
+
+        - name: offset
+          in: query
+          description: Offset
+          required: false
+          schema:
+            type: integer
+
+        - name: limit
+          in: query
+          description: Limit
+          required: false
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: Successful operation
+    post:
+      tags:
+        - Restaurant
+      summary: Add new Restaurant.
+      requestBody:
+        description: Restaurant json
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definations/Restaurant"
+      responses:
+        "200":
+          description: Successful operation
+        "500":
+          description: DB error
+
+  /filter:
+    post:
+      tags:
+        - Restaurant
+      summary: Returns filtered restaurants.
+      requestBody:
+        description: Filter json
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city:
+                  type: string
+                cuisine:
+                  type: array
+                  items:
+                    type: string
+
+      responses:
+        "200":
+          description: Successful operation
+
+  /{id}:
+    get:
+      tags:
+        - Restaurant
+      summary: Returns restaurants.
+      parameters:
+        - name: id
+          in: path
+          description: Restaurant id
+          required: true
+          schema:
+          type: string
+
+      responses:
+        "200":
+          description: Successful operation
+    patch:
+      tags:
+        - Restaurant
+      summary: Update Restaurant.
+      parameters:
+        - name: id
+          in: path
+          description: Restaurant id
+          required: true
+          schema:
+          type: string
+      requestBody:
+        description: Restaurant json
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/definations/Restaurant"
+      responses:
+        "200":
+          description: Successful operation
+        "500":
+          description: DB error
+
+definations:
+  Restaurant:
+    type: object
+    properties:
+      name:
+        type: string
+      address:
+        type: string
+      city:
+        type: string
+      location:
+        type: object
+        properties:
+          lat:
+            type: integer
+          lng:
+            type: integer
+      menu:
+        type: array
+        items:
+          properties:
+            name:
+              type: string
+            price:
+              type: integer
+      cuisine:
+        type: array
+        items:
+          type: string

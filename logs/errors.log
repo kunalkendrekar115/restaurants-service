@@ -1,0 +1,6 @@
+ Jul-31-2021 22:18:31: Path: /restaurants/ad, CastError: Cast to ObjectId failed for value "ad" (type string) at path "_id" for model "RestaruntsModal"
+ Jul-31-2021 22:19:12: Path: /restaurants/60fea0d36423db7aa4440b2, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa4440b2" (type string) at path "_id" for model "RestaruntsModal"
+ Jul-31-2021 22:37:20: Path: /restaurants/, SyntaxError: Unexpected token l in JSON at position 93
+ Jul-31-2021 22:44:23: Path: /restaurants/60fea0d36423db7aa4440b23, SyntaxError: Unexpected token } in JSON at position 50
+ Jul-31-2021 22:56:09: Path: /restaurants/filter, ReferenceError: cuisine is not defined
+ Jul-31-2021 23:32:51: Path: /restaurants/, ObjectParameterError: Parameter "obj" to Document() must be an object, got Daal
