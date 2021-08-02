@@ -4,3 +4,52 @@
  Jul-31-2021 22:44:23: Path: /restaurants/60fea0d36423db7aa4440b23, SyntaxError: Unexpected token } in JSON at position 50
  Jul-31-2021 22:56:09: Path: /restaurants/filter, ReferenceError: cuisine is not defined
  Jul-31-2021 23:32:51: Path: /restaurants/, ObjectParameterError: Parameter "obj" to Document() must be an object, got Daal
+ Aug-01-2021 12:18:37: Path: /restaurants/, SyntaxError: Unexpected token } in JSON at position 74
+ Aug-01-2021 12:20:48: Path: /restaurants/, SyntaxError: Unexpected token m in JSON at position 123
+ Aug-01-2021 12:20:58: Path: /restaurants/, SyntaxError: Unexpected string in JSON at position 123
+ Aug-01-2021 12:22:28: Path: /restaurants/, SyntaxError: Unexpected token n in JSON at position 133
+ Aug-01-2021 21:00:10: Path: /restaurants/filters, CastError: Cast to ObjectId failed for value "filters" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-01-2021 21:00:40: Path: /restaurants/filter, CastError: Cast to ObjectId failed for value "filter" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-01-2021 21:09:07: Path: /restaurants/60fea0d36423db7aa4440b, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa4440b" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-01-2021 21:10:51: Path: /restaurants/60fea0d36423db7aa4440b, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa4440b" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-01-2021 21:11:16: Path: /restaurants/60fea0d36423db7aa4440b29, ReferenceError: restaurant is not defined
+ Aug-01-2021 21:21:22: Path: /restaurants/60fea0d36423db7aa444, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa444" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-01-2021 21:21:33: Path: /restaurants/60fea0d36423db7aa444, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa444" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-01-2021 21:24:51: Path: /restaurants/60fea0d36423db7aa444, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa444" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-01-2021 22:05:33: Path: /restaurants/60fea0d36423db7aa444, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa444" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-02-2021 14:42:26: Path: /restaurants/60fea0d36423db7aa444, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa444" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-02-2021 15:27:59: Path: /restaurants/60fea0d36423db7aa4440b29, TypeError: Cannot read property 'length' of null
+ Aug-02-2021 15:28:51: Path: /restaurants/60fea0d36423db7aa4440b29, TypeError: Cannot read property 'length' of null
+ Aug-02-2021 15:35:16: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 15:50:27: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 15:51:08: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 15:55:05: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 15:55:51: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 15:56:25: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 15:56:57: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 15:57:54: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 15:58:27: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:28:43: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:29:03: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:30:34: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:30:58: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:31:21: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:32:33: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:36:34: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:37:37: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:41:28: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:41:46: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:42:28: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:42:51: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:44:04: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:44:47: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:45:25: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:46:09: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:46:55: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:47:30: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:48:41: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:49:55: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 16:50:18: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 17:07:00: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 17:09:08: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-02-2021 17:18:13: Path: /restaurants/60fea0d36423db7aa4440b, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa4440b" (type string) at path "_id" for model "RestaruntsModal"

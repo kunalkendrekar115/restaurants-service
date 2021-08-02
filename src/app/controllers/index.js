@@ -80,9 +80,11 @@ const getRestaurantById = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const restaurants = await RestaruntsModal.findById(id);
+    const restaurant = await RestaruntsModal.find({ _id: id });
 
-    res.status(200).json(restaurants);
+    if (!restaurant.length) throw new CustomError(404, "Restaurant Not Found");
+
+    res.status(200).json(restaurant);
   } catch (error) {
     next(error);
   }

@@ -18,7 +18,9 @@ const restaruntSchema = new Schema({
     lat: Number
   },
   cuisine: [String],
-  menu: [Menu.schema]
+  menu: [Menu.schema],
+  avgRating: Number,
+  totalRatings: Number
 });
 
 module.exports = mongoose.model("RestaruntsModal", restaruntSchema, "restaurants");

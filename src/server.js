@@ -2,6 +2,7 @@ const db = require("./db");
 const express = require("express");
 const { logger, errorHandler } = require("restaurants-utils");
 const { restaruntsRoutes } = require("./app/routes");
+const { connect: connectToMessageQueue } = require("./app/message-queue");
 
 db.connectToDatabase();
 
@@ -20,3 +21,7 @@ app.use("/restaurants", restaruntsRoutes);
 app.use(errorHandler);
 
 app.listen(4000, () => logger.info("Running Restaurants  API Services on PORT 4000"));
+
+connectToMessageQueue();
+
+module.exports = app;

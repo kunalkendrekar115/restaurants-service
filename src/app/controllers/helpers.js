@@ -6,8 +6,8 @@ const buildQueryForSearch = (search) => ({
   ]
 });
 
-const buildQueryForFilter = (query) => {
-  const { city, cuisine } = query;
+const buildQueryForFilter = (body) => {
+  const { city, cuisine } = body;
 
   return { ...(city && { city }), ...(cuisine && { cuisine: { $all: cuisine } }) };
 };
