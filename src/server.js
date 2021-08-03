@@ -1,3 +1,6 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const db = require("./db");
 const express = require("express");
 const { logger, errorHandler } = require("restaurants-utils");

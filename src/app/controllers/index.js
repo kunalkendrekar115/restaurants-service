@@ -3,6 +3,7 @@ const { RestaruntsModal } = require("../../db");
 const { CustomError } = require("restaurants-utils");
 
 const { buildQueryForSearch, buildQueryForFilter } = require("./helpers");
+const { updateRedisCache, invalidateRedisCache } = require("../routes/helpers");
 
 const addNewRestaurant = async (req, res, next) => {
   try {
@@ -39,6 +40,7 @@ const updateRestaurant = async (req, res, next) => {
 
     const updated = await RestaruntsModal.findByIdAndUpdate(id, query, { new: true, upsert: true });
 
+    invalidateRedisCache(id);
     res.status(200).json(updated);
   } catch (error) {
     next(error);
@@ -83,6 +85,8 @@ const getRestaurantById = async (req, res, next) => {
     const restaurant = await RestaruntsModal.find({ _id: id });
 
     if (!restaurant.length) throw new CustomError(404, "Restaurant Not Found");
+
+    updateRedisCache(id, restaurant);
 
     res.status(200).json(restaurant);
   } catch (error) {

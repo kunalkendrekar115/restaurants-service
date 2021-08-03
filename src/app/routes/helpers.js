@@ -1,5 +1,8 @@
-const { CustomError } = require("restaurants-utils");
+const { CustomError, logger } = require("restaurants-utils");
 const yup = require("yup");
+
+const redis = require("redis");
+const client = redis.createClient();
 
 const restaurantSchema = yup.object().shape({
   name: yup.string().required("Restaurant Name is Required"),
@@ -35,4 +38,43 @@ const validateResourceMW = (resourceSchema) => async (req, res, next) => {
   }
 };
 
-module.exports = { restaurantSchema, validateResourceMW };
+fetchFromRedisMW = (redisKey) => (req, res, next) => {
+  let key = redisKey;
+
+  if (!key) key = req.params.id;
+
+  client.get(key, (err, data) => {
+    if (err) {
+      logger.error(err);
+      next(err);
+      return;
+    }
+    if (data) {
+      logger.info("Fetched from redis");
+      res.status(200).json(JSON.parse(data));
+      return;
+    }
+
+    next();
+  });
+};
+
+updateRedisCache = (key, value) => {
+  client.setex(key, 5 * 60, JSON.stringify(value), (err) => {
+    if (!err) logger.info(`Updated Redis cache with key ${key}`);
+  });
+};
+
+invalidateRedisCache = (key) => {
+  client.del(key, function (err, reply) {
+    if (!err) logger.info(`invalidated Redis cache with key ${key}`);
+  });
+};
+
+module.exports = {
+  restaurantSchema,
+  validateResourceMW,
+  fetchFromRedisMW,
+  updateRedisCache,
+  invalidateRedisCache
+};

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const { logger } = require("restaurants-utils");
 
-const dbUri = "mongodb+srv://kunalkmk:kunal12345@cluster0-v9tid.mongodb.net/foodorderdemo?retryWrites=true&w=majority";
+const dbUri = process.env.DB_CONNECTION;
 
 const connectToDatabase = async () => {
   try {
@@ -8,9 +9,9 @@ const connectToDatabase = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
-    console.log("Connected to MongoDb Atlas");
+    logger.info("Connected to MongoDb Atlas");
   } catch (error) {
-    console.log(error);
+    logger.error(error);
   }
 };
 

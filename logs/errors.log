@@ -53,3 +53,14 @@
  Aug-02-2021 17:07:00: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
  Aug-02-2021 17:09:08: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
  Aug-02-2021 17:18:13: Path: /restaurants/60fea0d36423db7aa4440b, CastError: Cast to ObjectId failed for value "60fea0d36423db7aa4440b" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-03-2021 15:13:40: Path: /restaurants/asd, CastError: Cast to ObjectId failed for value "asd" (type string) at path "_id" for model "RestaruntsModal"
+ Aug-03-2021 16:22:31: Path: /restaurants/60ffd0a6f2c054205ebe86c8, TypeError: Cannot read property 'get' of undefined
+ Aug-03-2021 16:40:07: node_redis: The GET command contains a invalid argument type of "undefined".
+Only strings, dates and buffers are accepted. Please update your code to use valid argument types.
+ Aug-03-2021 16:50:36: Path: /restaurants/60ffd0a6f2c054205ebe86c8, ReferenceError: redisKey is not defined
+ Aug-03-2021 16:51:01: Path: /restaurants/60ffd0a6f2c054205ebe86c8, TypeError: client.setEx is not a function
+ Aug-03-2021 17:14:33: Path: /restaurants/60fea0d36423db7aa4440b23, SyntaxError: Unexpected token n in JSON at position 4
+ Aug-03-2021 17:14:43: Path: /restaurants/60fea0d36423db7aa4440b23, SyntaxError: Unexpected token 
+ in JSON at position 42
+ Aug-03-2021 17:14:53: Path: /restaurants/60fea0d36423db7aa4440b23, TypeError: invalidateRedisCache is not a function
+ Aug-03-2021 17:32:01: connect ECONNREFUSED 127.0.0.1:5672

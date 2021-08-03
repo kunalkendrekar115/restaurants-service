@@ -4,19 +4,16 @@ const { RestaruntsModal } = require("../../db");
 const queue_name = "rating_reviews_update";
 
 const amqp = require("amqplib/callback_api");
-
+const { invalidateRedisCache } = require("../routes/helpers");
 let connection = null;
 const connect = () => {
-  amqp.connect(
-    "amqps://hutlyloi:0M39C00k8_538qtCWNcPhCYe-uZtioOn@beaver.rmq.cloudamqp.com/hutlyloi",
-    function (err, conn) {
-      if (err != null) logger.error(err);
-      logger.info("Connected Message Queue");
-      connection = conn;
+  amqp.connect(process.env.RABIT_MQ, function (err, conn) {
+    if (err != null) logger.error(err);
+    logger.info("Connected Message Queue");
+    connection = conn;
 
-      listenForRatingsUpdate();
-    }
-  );
+    listenForRatingsUpdate();
+  });
 };
 
 function publishMessage(rating_update) {
@@ -55,6 +52,8 @@ function listenForRatingsUpdate() {
         );
 
         logger.info("Ratings Updated");
+
+        invalidateRedisCache(restaurantId);
 
         ch.ack(msg);
       }

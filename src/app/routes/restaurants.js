@@ -20,6 +20,6 @@ router.get("/", getRestaurants);
 
 router.post("/filter", filterRestaurants);
 
-router.get("/:id", getRestaurantById);
+router.get("/:id", fetchFromRedisMW(), getRestaurantById);
 
 module.exports = { router };
