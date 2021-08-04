@@ -6,6 +6,7 @@ const express = require("express");
 const { logger, errorHandler } = require("restaurants-utils");
 const { restaruntsRoutes } = require("./app/routes");
 const { connect: connectToMessageQueue } = require("./app/message-queue");
+const { connectRedisClient } = require("./app/redis-cache");
 
 db.connectToDatabase();
 
@@ -26,5 +27,6 @@ app.use(errorHandler);
 app.listen(4000, () => logger.info("Running Restaurants  API Services on PORT 4000"));
 
 connectToMessageQueue();
+connectRedisClient();
 
 module.exports = app;

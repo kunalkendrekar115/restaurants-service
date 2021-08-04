@@ -64,3 +64,26 @@ Only strings, dates and buffers are accepted. Please update your code to use val
  in JSON at position 42
  Aug-03-2021 17:14:53: Path: /restaurants/60fea0d36423db7aa4440b23, TypeError: invalidateRedisCache is not a function
  Aug-03-2021 17:32:01: connect ECONNREFUSED 127.0.0.1:5672
+ Aug-04-2021 14:49:28: Path: /restaurants/60fea0d36423db7aa4440b23, TypeError: Cannot read property 'get' of null
+ Aug-04-2021 14:50:38: Path: /restaurants/60fea0d36423db7aa4440b23, ReferenceError: id is not defined
+ Aug-04-2021 14:54:17: Path: /restaurants/60fea0d36423db7aa4440b23, TypeError: Cannot read property 'conencted' of null
+ Aug-04-2021 14:54:46: Path: /restaurants/60fea0d36423db7aa4440b23, TypeError: Cannot read property 'get' of null
+ Aug-04-2021 14:55:50: Path: /restaurants/60fea0d36423db7aa4440b23, TypeError: Cannot read property 'get' of null
+ Aug-04-2021 14:56:39: Path: /restaurants/60fea0d36423db7aa4440b23, ReferenceError: next is not defined
+ Aug-04-2021 14:58:01: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-04-2021 15:00:08: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-04-2021 15:00:31: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-04-2021 15:00:50: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-04-2021 15:01:10: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-04-2021 15:03:57: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-04-2021 15:13:05: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-04-2021 15:14:47: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+ Aug-04-2021 15:14:47: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+ Aug-04-2021 15:14:48: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+ Aug-04-2021 15:14:48: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+ Aug-04-2021 15:14:49: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+ Aug-04-2021 15:14:51: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+ Aug-04-2021 15:14:54: Redis connection to 127.0.0.1:6379 failed - connect ECONNREFUSED 127.0.0.1:6379
+ Aug-04-2021 15:18:48: Redis connection in broken state: retry aborted.
+ Aug-04-2021 15:19:24: Redis connection in broken state: retry aborted.
+ Aug-04-2021 15:20:37: Redis connection in broken state: retry aborted.

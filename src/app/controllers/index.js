@@ -1,9 +1,9 @@
-const { RestaruntsModal } = require("../../db");
-
 const { CustomError } = require("restaurants-utils");
 
+const { updateRedisCache, invalidateRedisCache } = require("../redis-cache");
+const { RestaruntsModal } = require("../../db");
+
 const { buildQueryForSearch, buildQueryForFilter } = require("./helpers");
-const { updateRedisCache, invalidateRedisCache } = require("../routes/helpers");
 
 const addNewRestaurant = async (req, res, next) => {
   try {

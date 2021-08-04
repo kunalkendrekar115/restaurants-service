@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 chai.should();
 
 const app = express();
-let stub1, stub2;
+let RestaurantModalStub1, RestaurantModalStub2;
 let server = null;
 
 const fakeData = {
@@ -47,13 +47,13 @@ after(() => {
 });
 
 beforeEach(() => {
-  stub1 = sinon.stub(RestaruntsModal, "find").returns([{ ...fakeData }]);
-  stub2 = sinon.stub(RestaruntsModal, "count").returns(5);
+  RestaurantModalStub1 = sinon.stub(RestaruntsModal, "find").returns([{ ...fakeData }]);
+  RestaurantModalStub2 = sinon.stub(RestaruntsModal, "count").returns(5);
 });
 
 afterEach(() => {
-  stub1.restore();
-  stub2.restore();
+  RestaurantModalStub1.restore();
+  RestaurantModalStub2.restore();
 });
 
 describe("Restaurants", () => {
@@ -105,39 +105,37 @@ describe("Restaurants", () => {
 
     const mock = null;
 
-    it("should through 403 for not found restaurant", async () => {
+    it("should through 404 for not found restaurant", async () => {
       const id = "60fea0d36423db7aa4440b29";
-      stub1.restore();
-      stub2.restore();
-      stub1 = sinon.stub(RestaruntsModal, "find").returns([]);
+      RestaurantModalStub1.restore();
+      RestaurantModalStub2.restore();
+      RestaurantModalStub1 = sinon.stub(RestaruntsModal, "find").returns([]);
       chai
         .request(app)
         .get(`/restaurants/${id}`)
         .end((err, res) => {
-          console.log(res.body);
-          res.should.have.status(403);
+          res.should.have.status(404);
         });
     });
 
     it("should through 500 for db error", async () => {
       const id = "60fea0d36423db7aa44";
 
-      stub1.restore();
-      stub2.restore();
+      RestaurantModalStub1.restore();
+      RestaurantModalStub2.restore();
 
-      stub1 = sinon.stub(RestaruntsModal, "find").throws(new Error("DB Error"));
+      RestaurantModalStub1 = sinon.stub(RestaruntsModal, "find").throws(new Error("DB Error"));
       chai
         .request(app)
         .get(`/restaurants/${id}`)
         .end((err, res) => {
-          console.log(err);
           res.should.have.status(500);
         });
     });
   });
 
   describe("Add new restaurant", () => {
-    stub1 = sinon.stub(RestaruntsModal.prototype, "save").returns({ id: "test" });
+    RestaurantModalStub1 = sinon.stub(RestaruntsModal.prototype, "save").returns({ id: "test" });
 
     it("should successfully add restaurant", async () => {
       chai
@@ -147,36 +145,36 @@ describe("Restaurants", () => {
         .send(fakeData)
         .end((err, res) => {
           res.should.have.status(200);
-
           res.body.should.be.a("object");
         });
     });
   });
 
   describe("update restaurant", () => {
-    stub1 = sinon.stub(RestaruntsModal, "findById").callsFake((id) => {
-      console.log(id);
+    RestaurantModalStub1 = sinon.stub(RestaruntsModal, "findById").callsFake((id) => {
       if (id === "adefgew") return { name: "test" };
       return null;
     });
 
-    stub2 = sinon
+    RestaurantModalStub2 = sinon
       .stub(RestaruntsModal, "findByIdAndUpdate")
       .returns({ id: "Test Hotel", name: "test" });
 
-    const fakeData = {
+    const fakeUpdateData = {
       name: "Test Hotel"
     };
 
     it("should successfully update restaurant", async () => {
-      const id = "adefgew";
+      const restaurantId = "adefgew";
 
       chai
         .request(app)
-        .patch(`/restaurants/${id}`)
+        .patch(`/restaurants/${restaurantId}`)
         .set("Content-Type", "application/json")
-        .send(fakeData)
-        .end((err, res) => {
+        .send(fakeUpdateData)
+        .end(async (err, res) => {
+          const data = await res.json();
+          chai.expect(data.name).to.equal(fakeUpdateData.name);
           res.should.have.status(200);
         });
     });

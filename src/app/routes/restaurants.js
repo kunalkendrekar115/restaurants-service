@@ -9,6 +9,7 @@ const {
 } = require("../controllers");
 
 const { restaurantSchema, validateResourceMW } = require("./helpers");
+const { fetchFromRedisMW } = require("../redis-cache");
 
 const router = express.Router();
 

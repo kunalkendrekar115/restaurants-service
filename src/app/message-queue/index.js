@@ -1,10 +1,12 @@
 const { logger } = require("restaurants-utils");
 
 const { RestaruntsModal } = require("../../db");
-const queue_name = "rating_reviews_update";
 
+const queue_name = "rating_reviews_update";
 const amqp = require("amqplib/callback_api");
-const { invalidateRedisCache } = require("../routes/helpers");
+
+const { invalidateRedisCache } = require("../redis-cache");
+
 let connection = null;
 const connect = () => {
   amqp.connect(process.env.RABIT_MQ, function (err, conn) {
