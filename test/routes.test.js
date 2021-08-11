@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 chai.should();
 
 const app = express();
-let RestaurantModalStub1, RestaurantModalStub2;
+
 let server = null;
 
 const fakeData = {
@@ -46,14 +46,21 @@ after(() => {
   server.close();
 });
 
+let RestaurantModalStub1, RestaurantModalStub2, RestaurantModalStub3;
+
 beforeEach(() => {
   RestaurantModalStub1 = sinon.stub(RestaruntsModal, "find").returns([{ ...fakeData }]);
   RestaurantModalStub2 = sinon.stub(RestaruntsModal, "count").returns(5);
+  RestaurantModalStub3 = sinon.stub(RestaruntsModal, "findById").callsFake((id) => {
+    if (id === "60fea0d36423db7aa4440b23") return fakeData;
+    return null;
+  });
 });
 
 afterEach(() => {
   RestaurantModalStub1.restore();
   RestaurantModalStub2.restore();
+  RestaurantModalStub3.restore();
 });
 
 describe("Restaurants", () => {
@@ -65,6 +72,7 @@ describe("Restaurants", () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a("object");
+          chai.expect(res.body.totalRecords).to.equal(5);
         });
     });
 
@@ -89,6 +97,19 @@ describe("Restaurants", () => {
           res.body.should.be.a("array");
         });
     });
+
+    it("should filter restaurants by menu", async () => {
+      chai
+        .request(app)
+        .post("/restaurants/filter")
+        .set("content-type", "application/json")
+        .set({ menu: "test menu" })
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a("array");
+          chai.expect(res.body).not.to.be.empty;
+        });
+    });
   });
 
   describe("getRestaurant By Id", () => {
@@ -102,8 +123,6 @@ describe("Restaurants", () => {
           res.body.should.be.a("array");
         });
     });
-
-    const mock = null;
 
     it("should through 404 for not found restaurant", async () => {
       const id = "60fea0d36423db7aa4440b29";
@@ -135,7 +154,7 @@ describe("Restaurants", () => {
   });
 
   describe("Add new restaurant", () => {
-    RestaurantModalStub1 = sinon.stub(RestaruntsModal.prototype, "save").returns({ id: "test" });
+    RestaurantModalStub1 = sinon.stub(RestaruntsModal.prototype, "save").returns({ id: "testId" });
 
     it("should successfully add restaurant", async () => {
       chai
@@ -145,17 +164,24 @@ describe("Restaurants", () => {
         .send(fakeData)
         .end((err, res) => {
           res.should.have.status(200);
-          res.body.should.be.a("object");
+          chai.expect(res.body).to.have.property("id", "testId");
+        });
+    });
+
+    it("should show validation error for required fields", async () => {
+      chai
+        .request(app)
+        .post(`/restaurants`)
+        .set("Content-Type", "application/json")
+        .send({ name: "missing fields" })
+        .end(async (err, res) => {
+          res.should.have.status(403);
+          chai.expect(res.body.message).includes("Restaurant Address is Required");
         });
     });
   });
 
   describe("update restaurant", () => {
-    RestaurantModalStub1 = sinon.stub(RestaruntsModal, "findById").callsFake((id) => {
-      if (id === "adefgew") return { name: "test" };
-      return null;
-    });
-
     RestaurantModalStub2 = sinon
       .stub(RestaruntsModal, "findByIdAndUpdate")
       .returns({ id: "Test Hotel", name: "test" });
@@ -165,7 +191,7 @@ describe("Restaurants", () => {
     };
 
     it("should successfully update restaurant", async () => {
-      const restaurantId = "adefgew";
+      const restaurantId = "60fea0d36423db7aa4440b23";
 
       chai
         .request(app)
@@ -173,8 +199,7 @@ describe("Restaurants", () => {
         .set("Content-Type", "application/json")
         .send(fakeUpdateData)
         .end(async (err, res) => {
-          const data = await res.json();
-          chai.expect(data.name).to.equal(fakeUpdateData.name);
+          chai.expect(data.body.name).to.equal(fakeUpdateData.name);
           res.should.have.status(200);
         });
     });

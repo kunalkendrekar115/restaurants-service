@@ -52,12 +52,14 @@ const getRestaurants = async (req, res, next) => {
     let restaurants = null;
     const { search, offset, limit } = req.query;
     if (!search) {
+      console.log("kunal");
       const count = await RestaruntsModal.count({});
       restaurants = await RestaruntsModal.find({}, null, { skip: +offset, limit: +limit });
 
       restaurants = { totalRecords: count, restaurants };
     } else {
       const inputQuery = buildQueryForSearch(search);
+
       restaurants = await RestaruntsModal.find(inputQuery);
     }
 
