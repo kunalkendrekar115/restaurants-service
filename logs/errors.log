@@ -217,3 +217,5 @@ Only strings, dates and buffers are accepted. Please update your code to use val
  Aug-11-2021 11:51:36: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
  Aug-11-2021 11:53:46: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
  Aug-11-2021 11:59:04: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error
+ Aug-11-2021 17:14:05: Path: /restaurants/60ffd0a6f2c054205ebe86c8, SyntaxError: Unexpected token } in JSON at position 31
+ Aug-11-2021 17:15:23: Path: /restaurants/60fea0d36423db7aa44, Error: DB Error

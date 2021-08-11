@@ -53,7 +53,7 @@ function listenForRatingsUpdate() {
           }
         );
 
-        logger.info("Ratings Updated");
+        logger.info(`Ratings Updated for ${restaurantId}`);
 
         invalidateRedisCache(restaurantId);
 
